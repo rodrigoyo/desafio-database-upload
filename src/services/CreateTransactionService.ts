@@ -1,6 +1,6 @@
 import { getCustomRepository, getRepository } from 'typeorm';
 
-// import AppError from '../errors/AppError';
+import AppError from '../errors/AppError';
 
 import TransactionsRepository from '../repositories/TransactionsRepository';
 
@@ -24,6 +24,13 @@ class CreateTransactionService {
     // TODO
     const transactionsRepository = getCustomRepository(TransactionsRepository);
     const categoryRepository = getRepository(Category);
+
+    if (type === 'outcome') {
+      const balance = await transactionsRepository.getBalance();
+      if (balance.total < value) {
+        throw new AppError('Insufficient amount for this operation.');
+      }
+    }
 
     const categoryExist = await categoryRepository.findOne({
       where: [{ title: category }],
