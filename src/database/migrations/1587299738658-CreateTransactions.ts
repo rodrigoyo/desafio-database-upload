@@ -15,9 +15,9 @@ export default class CreateTransactions1587299738658
             default: 'uuid_generate_v4()',
           },
           { name: 'title', type: 'varchar' },
-          { name: 'value', type: 'int' },
+          { name: 'value', type: 'decimal', precision: 13, scale: 2 },
           { name: 'type', type: 'varchar' },
-          { name: 'category_id', type: 'uuid' },
+          { name: 'category_id', type: 'uuid', isNullable: true },
           {
             name: 'created_at',
             type: 'timestamp',
