@@ -23,9 +23,6 @@ class ImportTransactionsService {
     const categoriesRepository = getRepository(Category);
     const csvFile = path.join(uploadConfig.directory, filename);
 
-    // const transactions = [];
-    // const categories = [];
-
     const parser = parse({ delimiter: ',', from_line: 2 });
 
     const parseCSV = fs.createReadStream(csvFile).pipe(parser);
@@ -80,6 +77,8 @@ class ImportTransactionsService {
     );
 
     await transactionsRepository.save(createdTransactions);
+
+    await fs.promises.unlink(csvFile);
 
     return createdTransactions;
   }
