@@ -2,6 +2,7 @@ import {
   Entity,
   Column,
   CreateDateColumn,
+  UpdateDateColumn,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
@@ -16,7 +17,7 @@ class Category {
   @CreateDateColumn()
   created_at: Date;
 
-  @CreateDateColumn()
+  @UpdateDateColumn()
   updated_at: Date;
 }
 
